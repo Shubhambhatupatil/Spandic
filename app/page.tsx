@@ -52,7 +52,7 @@ export default function HomePage() {
   const [notice, setNotice] = useState("");
   const [showComposer, setShowComposer] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState<string | null>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
 
   const visiblePosts = useMemo(() => {
     const term = query.trim().toLowerCase();
