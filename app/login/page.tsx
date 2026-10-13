@@ -22,6 +22,16 @@ export default function LoginPage() {
     setIsError(false);
   }
 
+  function getSiteRedirect(path = "/") {
+    const configuredSite = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+    const fallbackSite = "https://spandic-r5csrsdj5-shubhambhatupatil-5720s-projects.vercel.app";
+    const currentOrigin = window.location.origin;
+    const siteOrigin = configuredSite
+      ? (configuredSite.startsWith("http") ? configuredSite : `https://${configuredSite}`).replace(/\\/$/, "")
+      : (currentOrigin.includes("localhost") || currentOrigin.includes("127.0.0.1") ? fallbackSite : currentOrigin);
+    return `${siteOrigin}${path.startsWith("/") ? path : `/${path}`}`;
+  }
+
   async function oauth(provider: "google" | "facebook") {
     setMessage("");
     setIsError(false);
@@ -30,7 +40,7 @@ export default function LoginPage() {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
-        options: { redirectTo: `${window.location.origin}/` }
+        options: { redirectTo: getSiteRedirect("/") }
       });
       if (error) throw error;
     } catch (error) {
@@ -65,7 +75,7 @@ export default function LoginPage() {
 
       if (mode === "reset") {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: `${window.location.origin}/login`
+          redirectTo: getSiteRedirect("/login")
         });
         if (error) throw error;
         setMessage("If an account exists for that email, a password-reset link will be sent.");
