@@ -90,7 +90,7 @@ Complete P0 only, with minimal changes and explicit verification. Do not build a
 
 ## Additional prototype defects found during code review
 
-- **Brand spelling in the header:** the current HTML text concatenation reads “SPANDANIC”, not “SPANDIC”. Fix when migrating the header into the shared app layout.
+- **Brand spelling in the original prototype:** an earlier version rendered “SPANDANIC”. This was corrected in `index.html` on 2026-10-13; the active Next.js header and metadata use “SPANDIC”. Keep the name consistent in any future UI changes.
 - **Like-count parsing:** the like handler strips punctuation from labels such as “2.4k”, turning it into 24 before incrementing. Do not preserve this counter logic; use a proper integer count for demo labels or replace it with real database counts later.
 - **Navigation is mostly decorative:** the Explore, Reels, Messages, Notifications, and Profile labels do not navigate to working routes.
 - **Save is cosmetic:** the Save button only changes its label and does not persist a saved-post relationship.
