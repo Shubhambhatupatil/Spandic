@@ -128,6 +128,14 @@ export default function HomePage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
+    if (label === "Profile") {
+      window.location.assign("/profile");
+      return;
+    }
+    if (label === "Messages" || label === "Notifications") {
+      window.location.assign("/login");
+      return;
+    }
     setNotice(label + " is on the roadmap and will be connected in a later build. No fake backend is being shown.");
   }
 
@@ -179,7 +187,7 @@ export default function HomePage() {
 
       <aside className="right-rail">
         <div className="right-search"><span>⌕</span><input id="spandic-search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search people, posts…" aria-label="Search demo posts" /><kbd>⌘ K</kbd></div>
-        <section className="welcome-card"><div className="welcome-stars">✳ <span>✦</span> ✳</div><p className="eyebrow">A NEW KIND OF SOCIAL</p><h2>Less scrolling.<br /><em>More connecting.</em></h2><p>Find your people, follow your curiosity, and make room for perspectives beyond your bubble.</p><button onClick={() => setNotice("Sign-up will be enabled after secure authentication is implemented.")}>Join the conversation <span>↗</span></button><div className="welcome-foot"><span>MADE FOR EVERYWHERE</span><span>✳ SPANDIC</span></div></section>
+        <section className="welcome-card"><div className="welcome-stars">✳ <span>✦</span> ✳</div><p className="eyebrow">A NEW KIND OF SOCIAL</p><h2>Less scrolling.<br /><em>More connecting.</em></h2><p>Find your people, follow your curiosity, and make room for perspectives beyond your bubble.</p><button onClick={() => window.location.assign("/login")}>Join the conversation <span>↗</span></button><div className="welcome-foot"><span>MADE FOR EVERYWHERE</span><span>✳ SPANDIC</span></div></section>
         <section className="suggestions"><div className="section-top"><h2>People to know</h2><button className="text-button" onClick={() => setNotice("Discovery will be connected to real profiles later.")}>Explore ↗</button></div>{suggestions.map((person, i) => <div className="suggestion" key={person.handle}><div className={"mini-avatar suggestion-avatar avatar-" + (i + 2)}>{person.initials}</div><div className="suggestion-info"><strong>{person.name}</strong><span>{person.note}</span></div><button className={"follow-button " + (followed.includes(person.handle) ? "following" : "")} onClick={() => setFollowed((prev) => prev.includes(person.handle) ? prev.filter((h) => h !== person.handle) : [...prev, person.handle])}>{followed.includes(person.handle) ? "Following" : "Follow"}</button></div>)}</section>
         <section className="community-card"><span className="community-icon">✳</span><div><strong>Good things grow together.</strong><p>Be curious. Be kind. Be unmistakably you.</p></div></section>
         <div className="right-footer"><div><button onClick={() => setNotice("Community guidelines are planned before public launch.")}>Guidelines</button><button onClick={() => setNotice("Privacy information will be published before accounts launch.")}>Privacy</button><button onClick={() => setNotice("About SPANDIC page is planned.")}>About</button></div><p>© 2026 SPANDIC · A work in progress</p></div>
