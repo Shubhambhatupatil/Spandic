@@ -1,0 +1,19 @@
+# Local environment files (keep the example template tracked)
+.env
+.env.*
+!.env.example
+
+# Node.js / Next.js (for the planned application foundation)
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+# Vercel local project metadata
+.vercel/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.vscode/
