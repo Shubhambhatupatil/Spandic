@@ -86,3 +86,12 @@ Before adding auth or database code, select and verify the application structure
 ## Next step
 
 Complete P0 only, with minimal changes and explicit verification. Do not build all social features in one generated change.
+
+
+## Additional prototype defects found during code review
+
+- **Brand spelling in the header:** the current HTML text concatenation reads “SPANDANIC”, not “SPANDIC”. Fix when migrating the header into the shared app layout.
+- **Like-count parsing:** the like handler strips punctuation from labels such as “2.4k”, turning it into 24 before incrementing. Do not preserve this counter logic; use a proper integer count for demo labels or replace it with real database counts later.
+- **Navigation is mostly decorative:** the Explore, Reels, Messages, Notifications, and Profile labels do not navigate to working routes.
+- **Save is cosmetic:** the Save button only changes its label and does not persist a saved-post relationship.
+- **Local media preview lifecycle:** object URLs are created for selected files but are not explicitly revoked. Clean them up when the preview is removed or the page lifecycle ends.
