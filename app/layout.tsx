@@ -5,7 +5,6 @@ export const metadata: Metadata = {
   title: "SPANDIC — Your world, in your feed",
   description: "Discover people, stories and ideas from around the world on SPANDIC.",
   applicationName: "SPANDIC",
-  metadataBase: new URL("https://spandic.vercel.app"),
   openGraph: {
     title: "SPANDIC",
     description: "Your world, in your feed.",
