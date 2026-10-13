@@ -1,29 +1,49 @@
 # SPANDIC
 
-SPANDIC is an early-stage global social-platform project. The current implementation is a static HTML/CSS/JavaScript prototype; real accounts, persistent posts, database-backed social actions, and media hosting are not implemented yet.
+SPANDIC is an early-stage, creator-first social platform. The repository now contains a Next.js App Router + TypeScript homepage foundation, while the original `index.html` remains preserved as a static reference prototype.
 
 ## Current status
 
-- The UI prototype is in `index.html`.
-- The verified starting-state audit and prioritized backlog are in `AUDIT.md`.
-- Product principles and proposed long-term architecture are in `PRODUCT_AND_ENGINEERING_PLAN.md`.
+- `app/page.tsx` and `app/globals.css`: responsive social homepage and browser-only demo interactions.
+- `app/layout.tsx`: app shell and metadata.
+- `AUDIT.md`: verified starting-state audit and prioritized backlog.
+- `PRODUCT_AND_ENGINEERING_PLAN.md`: product principles and long-term architecture.
+- Real accounts, shared/persistent posts, database, server-backed likes/follows/comments, secure media storage, messaging, notifications and moderation are **not implemented yet**.
 
-## Preview locally
+## Requirements
 
-The current prototype does not require Node.js or a package installation.
+- Node.js 20.9 or later
+- npm
 
-1. Open `index.html` in a modern browser, or serve the repository directory with any simple static file server.
-2. Try the demo interactions. They are browser-only; newly created posts and selected media do not sync to a server or other users.
-3. Do not treat the demo names and posts as real accounts or user-generated content.
+## Run locally
 
-## Planned engineering direction
+```bash
+npm install
+npm run dev
+```
 
-The proposed target is Next.js App Router + TypeScript with Supabase Auth/PostgreSQL/Row Level Security. Image storage and video delivery need proper server/storage integration. The framework migration and backend are not yet complete; check `AUDIT.md` for verified status and next steps.
+Open `http://localhost:3000`.
 
-## Development rules
+## Verify before deployment
 
-- Work in this repository and the `main` branch unless a reviewed change specifically requires otherwise.
-- Never commit passwords, access tokens, service-role keys, or populated local environment files.
-- Do not disable database Row Level Security as a shortcut.
-- Do not label placeholder interactions as production-ready.
-- Do not claim 100K+ user capacity until load tests and infrastructure/cost measurements support it.
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
+
+The repository does not yet include a generated npm lockfile; run `npm install` and commit the generated `package-lock.json` before treating dependency installation as fully reproducible.
+
+## Environment variables
+
+`.env.example` lists placeholder names for possible future Supabase integration. Supabase is **not connected yet**. Do not put real keys in Git. Never expose a service-role key in browser code.
+
+## Product roadmap
+
+1. Verify build, lint, type-check, responsive behavior and Vercel deployment.
+2. Add Supabase Auth, PostgreSQL schema, migrations and restrictive Row Level Security.
+3. Implement real profiles, persistent posts, likes, comments, follows and saves.
+4. Add search/discovery, image storage, Stories/Reels, messaging and notifications.
+5. Add reporting, blocking, moderation, observability, backups and load testing.
+
+Do not label demo state as production-ready or claim 100K+ user capacity until load tests and infrastructure/cost measurements support it.
