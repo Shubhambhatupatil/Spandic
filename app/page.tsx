@@ -118,7 +118,9 @@ export default function HomePage() {
       return;
     }
     if (label === "Search") {
-      document.getElementById("spandic-search")?.focus();
+      const mobileSearch = document.getElementById("spandic-mobile-search");
+      const desktopSearch = document.getElementById("spandic-search");
+      (window.matchMedia("(max-width: 720px)").matches ? mobileSearch : desktopSearch)?.focus();
       return;
     }
     if (label === "Create") {
@@ -144,6 +146,7 @@ export default function HomePage() {
 
       <section className="center-column">
         <header className="mobile-header"><a className="brand" href="#"><span className="brand-mark">s<span>.</span></span><span>SPANDIC</span></a><button className="icon-button" onClick={() => navAction("Notifications")} aria-label="Notifications">♡</button></header>
+        <div className="mobile-search"><span aria-hidden="true">⌕</span><input id="spandic-mobile-search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search people and posts…" aria-label="Search people and posts" /></div>
         <div className="feed-heading"><div><p className="eyebrow">TUESDAY, OCTOBER 13</p><h1>Your world, <em>in your feed.</em></h1></div><div className="online-pill"><span /> A world of perspectives</div></div>
 
         <section className="stories-section" aria-label="Stories">
