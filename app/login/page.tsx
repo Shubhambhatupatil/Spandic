@@ -40,7 +40,7 @@ export default function LoginPage() {
       }
 
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -49,7 +49,13 @@ export default function LoginPage() {
           }
         });
         if (error) throw error;
-        setMessage("If sign-up is enabled, check your email for a confirmation link. Your account is not active until confirmed.");
+
+        if (data.session) {
+          setMessage("Welcome to SPANDIC! Your account is ready.");
+          window.setTimeout(() => window.location.assign("/"), 700);
+        } else {
+          setMessage("Signup submitted. If email confirmation is enabled, check your inbox to activate your account.");
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
